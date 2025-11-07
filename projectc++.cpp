@@ -1,4 +1,4 @@
-// Hotel Management System
+// Hotel Management System 
 // Author: Ronak Kumar Goyal
 #include <iostream>
 #include <fstream>
