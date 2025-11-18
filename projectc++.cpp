@@ -6,7 +6,6 @@
 #include <string>
 using namespace std;
 
-// ------------------- Base Class -------------------
 class Person
 {
 protected:
@@ -22,7 +21,6 @@ public:
     }
 };
 
-// ------------------- Guest Class -------------------
 class Guest : public Person
 {
     int roomNo;
@@ -42,7 +40,6 @@ public:
     }
 };
 
-// ------------------- Room Class -------------------
 class Room
 {
     int roomNo;
@@ -76,7 +73,6 @@ public:
     void setAvailability(bool status) { isAvailable = status; }
 };
 
-// ------------------- Hotel Class -------------------
 class Hotel
 {
     Room rooms[10];
@@ -113,7 +109,6 @@ public:
     Room getRoom(int index) { return rooms[index]; }
 };
 
-// ------------------- Guest File Handler -------------------
 class GuestFileHandler
 {
 public:
@@ -140,7 +135,6 @@ public:
     }
 };
 
-// ------------------- Main Program -------------------
 int main()
 {
     Hotel h;
