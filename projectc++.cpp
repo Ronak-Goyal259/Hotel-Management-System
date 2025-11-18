@@ -1,8 +1,8 @@
-// Hotel Management System 
+// Hotel Management System
 // Author: Ronak Kumar Goyal
+
 #include <iostream>
 #include <fstream>
-#include <iomanip>
 #include <string>
 using namespace std;
 
@@ -22,7 +22,7 @@ public:
     }
 };
 
-// ------------------- Derived Class (Guest) -------------------
+// ------------------- Guest Class -------------------
 class Guest : public Person
 {
     int roomNo;
@@ -31,14 +31,14 @@ class Guest : public Person
 public:
     Guest() : Person(), roomNo(0), days(0) {}
     Guest(string n, string p, int r, int d) : Person(n, p), roomNo(r), days(d) {}
+
     int getRoom() { return roomNo; }
     int getDays() { return days; }
+
     void showDetails() override
     {
-        cout << left << setw(15) << name
-             << setw(12) << phone
-             << setw(8) << roomNo
-             << setw(5) << days << endl;
+        cout << name << "   " << phone << "   Room: "
+             << roomNo << "   Days: " << days << endl;
     }
 };
 
@@ -59,13 +59,16 @@ public:
         price = p;
         isAvailable = a;
     }
+
     void displayRoom()
     {
-        cout << left << setw(8) << roomNo
-             << setw(12) << type
-             << setw(10) << price
-             << setw(12) << (isAvailable ? "Yes" : "No") << endl;
+        cout << "Room: " << roomNo
+             << " | Type: " << type
+             << " | Price: " << price
+             << " | Available: " << (isAvailable ? "Yes" : "No")
+             << endl;
     }
+
     int getNo() { return roomNo; }
     string getType() { return type; }
     float getPrice() { return price; }
@@ -73,7 +76,7 @@ public:
     void setAvailability(bool status) { isAvailable = status; }
 };
 
-// ------------------- Hotel Management Class -------------------
+// ------------------- Hotel Class -------------------
 class Hotel
 {
     Room rooms[10];
@@ -93,8 +96,6 @@ public:
     void listRooms()
     {
         cout << "\n--- Room List ---\n";
-        cout << left << setw(8) << "No" << setw(12) << "Type"
-             << setw(10) << "Price" << setw(12) << "Available" << endl;
         for (int i = 0; i < roomCount; i++)
             rooms[i].displayRoom();
     }
@@ -112,7 +113,7 @@ public:
     Room getRoom(int index) { return rooms[index]; }
 };
 
-// ------------------- File Handling for Guest Data -------------------
+// ------------------- Guest File Handler -------------------
 class GuestFileHandler
 {
 public:
@@ -128,7 +129,7 @@ public:
         ifstream fin("guests.txt");
         if (!fin)
         {
-            cout << "No guest records found.\n";
+            cout << "No previous guest records.\n";
             return;
         }
         string line;
@@ -150,6 +151,7 @@ int main()
     int guestCount = 0;
 
     cout << "===== HOTEL MANAGEMENT SYSTEM =====\n";
+
     do
     {
         cout << "\n1. View Rooms"
@@ -208,8 +210,6 @@ int main()
         else if (choice == 3)
         {
             cout << "\n--- Current Guests ---\n";
-            cout << left << setw(15) << "Name" << setw(12) << "Phone"
-                 << setw(8) << "Room" << setw(5) << "Days" << endl;
             for (int i = 0; i < guestCount; i++)
                 guests[i].showDetails();
 
@@ -220,6 +220,7 @@ int main()
             int rno;
             cout << "Enter room number to checkout: ";
             cin >> rno;
+
             int idx = h.findRoom(rno);
             if (idx != -1)
             {
@@ -235,6 +236,7 @@ int main()
         {
             cout << "Invalid choice!\n";
         }
+
     } while (choice != 5);
 
     return 0;
